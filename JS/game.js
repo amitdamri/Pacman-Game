@@ -1,5 +1,5 @@
 var context;
-var shape = new Object();
+var shape = new Object(); // pacman position
 var board;
 var score;
 var pac_color;
@@ -9,8 +9,8 @@ var interval2;
 var lives;
 var initial_food;
 var game_length;
-var monsters;
-var monsters_position;
+var monsters; // monsters amount
+var monsters_position; // array of monsters positions
 var greenMonster;
 var blueMonster;
 var redMonster;
@@ -41,6 +41,11 @@ $(document).ready(function () {
 });
 
 
+// start game - init variable and execute
+// few marks on the board - [0=free cell] [2=pacman] [4=wall] [5=5 pts candy] [6=15 pts candy] [7=25 pts candy]
+// [9=monster] [10=monster and 5 pts candy] [11=monster and 15 pts candy] [12=monster and 25 pts candy]
+// [13=moving points] [14=moving points and 5 pts candy] [15=moving points and 15 pts candy] [16=moving points and 25 pts candy]
+// [20=pill] [21=pill and monster] [22=pill and moving points]
 function Start(userName) {
     //inits fields
     timeRemain = game_length;
@@ -98,7 +103,8 @@ function loadImages(){
         monsters_color[3] = yellowMonster;
 }
 
-function restartAfterLivesEnded() {
+// restart game after a death - monster touched pacman
+function restartAfterDeath() {
 
     lastPacmanPos = 4;
     clearCharacters();
@@ -106,6 +112,7 @@ function restartAfterLivesEnded() {
     Draw(4);
 }
 
+// clear pacman, monsters and moving points from board
 function clearCharacters() {
 
     for (let i = 0; i < board.length; i++) {
@@ -115,7 +122,7 @@ function clearCharacters() {
             else if (board[i][j] == 10 || board[i][j] == 14) board[i][j] = 5;
             else if (board[i][j] == 11 || board[i][j] == 15) board[i][j] = 6;
             else if (board[i][j] == 12 || board[i][j] == 16) board[i][j] = 7;
-            else if (board[i][j] == 21 || board[i][j] == 22) board[i][j] = 0;
+            else if (board[i][j] == 21 || board[i][j] == 22) board[i][j] = 20;
         }
     }
 
@@ -137,6 +144,7 @@ function gameKeyEventDown(event) {
     return false;
 }
 
+// place candies in free cells by required amount: 60% of 5 pts, 30% of 15 pts, 10% of 25 pts 
 function spreadFood(board, initial_food) {
     let array = new Array();
     let index = 0;
@@ -172,6 +180,7 @@ function spreadFood(board, initial_food) {
 
 }
 
+// place charachters on the board - monsters in corners, pacman and moving points on a random free cells 
 function placeCharacters(board) {
 
     // monsters
@@ -220,6 +229,7 @@ function placeCharacters(board) {
 
 }
 
+// returns a free cell [no charachters or candies]
 function findRandomEmptyCell(board) {
     let i = Math.floor(Math.random() * 19 + 1);
     let j = Math.floor(Math.random() * 19 + 1);
@@ -230,7 +240,7 @@ function findRandomEmptyCell(board) {
     return [i, j];
 }
 
-/**Updates time every according to the interval */
+// Updates time every according to the interval
 function updateTime() {
     timeRemain = timeRemain - 0.1;
     document.getElementById("lblTime").value = timeRemain.toFixed(1);
@@ -250,6 +260,7 @@ function updateTime() {
     }
 }
 
+// manages pacman movement
 function UpdatePosition(keyPressed) {
 
     lastPacmanPos = keyPressed; // update last position, for next drawings when pacman isn't moving
@@ -265,11 +276,14 @@ function UpdatePosition(keyPressed) {
     lblScore.value = score;
     lblLives.value = lives;
     
-    if (isMonsterTouchedPacman()) executeMonsterTouchedPacman();
-    else Draw(keyPressed);
+    if (isMonsterTouchedPacman()) 
+        executeMonsterTouchedPacman();
+    else 
+        Draw(keyPressed);
 
 }
 
+// update position of pacman when required key is pressed
 function updatePacmanPosition(keyPressed) {
     
     if (keyPressed == 1) {
@@ -292,6 +306,7 @@ function updatePacmanPosition(keyPressed) {
     }
 }
 
+// evaluates score if pacman ate candy, pill or moving points
 function pacmanPassedInCandyCell() {
 
     if (board[shape.i][shape.j] == 5) { // 5 pts candy
@@ -315,8 +330,8 @@ function pacmanPassedInCandyCell() {
     } else if (board[shape.i][shape.j] == 20) { // pill
          lives++;
     } else if (board[shape.i][shape.j] == 21) { // pill and monster
-        executeMonsterTouchedPacman();
         lives++;
+        //executeMonsterTouchedPacman();
     } else if (board[shape.i][shape.j] == 22) { // pill and moving points
         lives++;
         score += 50;
@@ -325,6 +340,7 @@ function pacmanPassedInCandyCell() {
 
 }
 
+// manages case when pacman touched monster
 function executeMonsterTouchedPacman() {
 
     //monster number '0' makes pacman lose 2 lives and 20 pts
@@ -357,6 +373,7 @@ function executeMonsterTouchedPacman() {
     
 }
 
+// manages live reducing case: a complete restart after invalidation (no more lives) or restart after a death
 function checkLives() {
     if (lives == 0) {
         alert("Loser!")
@@ -368,10 +385,11 @@ function checkLives() {
         }
     } else {
         alert("Monster Catch you.")
-        restartAfterLivesEnded();
+        restartAfterDeath();
     }
 }
 
+// calls each interval to update position of monsters and moving points
 function updatePositionsOfAutomaticCharacters() {
 
     updatePositionMonsters();
@@ -379,6 +397,7 @@ function updatePositionsOfAutomaticCharacters() {
         updatePositionMovingPoints();
 }
 
+// update position of monsters each interval
 function updatePositionMonsters() {
 
     for (let i = 0; i < monsters; i++) {
@@ -426,12 +445,14 @@ function updatePositionMonsters() {
 
 }
 
+// return true if it's an already catched place (by another characther)
 function movingPointsOrMonsterPlace(i, j) {
 
     return (board[i][j] == 9 || board[i][j] == 10 || board[i][j] == 11 || board[i][j] == 12 ||
         board[i][j] == 13 || board[i][j] == 14 || board[i][j] == 15 || board[i][j] == 16 || board[i][j] == 21 || board[i][j] == 22);
 }
 
+// return true if any of the monsters touched a pacman at this very moment
 function isMonsterTouchedPacman() {
     for (let i = 0; i < monsters; i++) {
         let position = monsters_position[i];
@@ -442,6 +463,7 @@ function isMonsterTouchedPacman() {
     return false;
 }
 
+// update position of moving points each interval
 function updatePositionMovingPoints() {
 
     // set old position as it supposed to be
@@ -486,6 +508,7 @@ function updatePositionMovingPoints() {
     Draw(lastPacmanPos);
 }
 
+// get all possible positions for a moving points to pass to, moving points will choose a random one
 function getPossiblePositions(i, j) {
 
     let ans = new Array();
@@ -505,6 +528,7 @@ function getPossiblePositions(i, j) {
     return ans;
 }
 
+// draw game: walls, passages, candies, charachters
 function Draw(key) {
 
     canvas.width = canvas.width; //clean board    
@@ -527,6 +551,7 @@ function Draw(key) {
 
 }
 
+// draw free cells
 function drawPassages(x, y) {
     context.clearRect(x - 17.5, y - 14, 35, 28);
     context.beginPath();
@@ -536,6 +561,7 @@ function drawPassages(x, y) {
     context.fill();
 }
 
+// manage pacman drawing by given pressed-key 
 function drawPacmanShape(key, x, y) {
     if (key == 1) {
         drawPacman(x, y, 1.7 * Math.PI, 1.4 * Math.PI, key);
@@ -548,6 +574,7 @@ function drawPacmanShape(key, x, y) {
     }
 }
 
+// draw walls
 function drawWalls(x, y) {
 
     context.beginPath();
@@ -558,6 +585,7 @@ function drawWalls(x, y) {
             
 }
 
+// draw any type of candy
 function drawCandies(i, j, x, y) {
 
     context.clearRect(x - 17.5, y - 14, 35, 28);
@@ -582,6 +610,7 @@ function drawCandies(i, j, x, y) {
     }
 }
 
+// draw pacman
 function drawPacman(x, y, sAngle, eAngle, key) {
 
     context.clearRect(x - 17.5, y - 14, 35, 28);
@@ -609,6 +638,7 @@ function drawPacman(x, y, sAngle, eAngle, key) {
 
 }
 
+// draw monsters
 function drawMonsters() {
 
     for (let i = 0; i < monsters; i++) {
@@ -620,6 +650,7 @@ function drawMonsters() {
     }
 }
 
+// draw moving points
 function drawMovingPoints() {
     for (let i = 0; i < 20; i++) {
         for (let j = 0; j < 20; j++) {
@@ -635,6 +666,7 @@ function drawMovingPoints() {
     }
 }
 
+// create walls
 function buildWalls(board) {
     // start with greed full of passages
     for (let i = 0; i < board.length; i++) {
@@ -654,6 +686,7 @@ function buildWalls(board) {
 
 }
 
+// write PAC '/n' MAN with walls
 function writePacmanInWalls(board) {
     //P
     for (let i = 4; i < 7; i++) {
@@ -763,6 +796,7 @@ function getShuffledCandiesArray(food) {
     return candies;
 }
 
+// after monster movement - turn the cell's value as it was and set new cell's value
 function setMonsterPosition(board, old_position, i, j) {
 
     if (board[old_position.i][old_position.j] == 9) {
@@ -783,6 +817,7 @@ function setMonsterPosition(board, old_position, i, j) {
     }
 }
 
+// monster move to given cell, set new value
 function setNewMonstersPosition(i, j) {
 
     if (board[i][j] == 0) {
