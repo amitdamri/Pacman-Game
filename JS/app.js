@@ -10,7 +10,6 @@ $(document).ready(function () {
 	setRegistrationRules();
 	setSettingsRules();
 	switchScreen("#welcomeScreen");
-
 });
 
 /**This class represents a user in the system - with all of its values */
@@ -242,6 +241,7 @@ function setSettingsRules() {
 	/**checks the inserted values */
 	$("#settingsForm").validate({
 		rules: {
+
 			numberOfBalls: {
 				required: true,
 				BallsConstraint: true
@@ -275,7 +275,7 @@ function setSettingsRules() {
 	jQuery.validator.addMethod("GameLengthConstraint", function (value, element) {
 		return this.optional(element) || (value >= 60);
 	}, "Game length should be greater than 60 seconds.");
-
+	
 }
 
 /**Switches between screens according to the sequence of the user clicks*/
@@ -356,7 +356,6 @@ function setSettings(form) {
 	foodColor[0] = form.elements["smallBall"].value;
 	foodColor[1] = form.elements["mediumBall"].value;
 	foodColor[2] = form.elements["bigBall"].value;
-
 	updateGamesSettings(foodRemain, gameLength, monstersNumber, foodColor);
 }
 
@@ -364,10 +363,11 @@ function setSettings(form) {
 function updateGamesSettings(foodRemain, gameLength, monstersNumber, foodColor) {
 
 	setGameSettings(foodRemain, gameLength, monstersNumber, foodColor);
+	
 	$("#upKeyLabel").text($("#upKey").val());
 	$("#downKeyLabel").text($("#downKey").val());
-	$("#leftKeyLable").text($("#leftkey").val());
-	$("#rightKeyLabel").text($("#rightkey").val());
+	$("#leftKeyLabel").text($("#leftKey").val());
+	$("#rightKeyLabel").text($("#rightKey").val());
 	$("#ballsLabel").text(foodRemain);
 	$("#monstersLabel").text(monstersNumber);
 	$("#lengthLabel").text(gameLength);
@@ -378,6 +378,7 @@ function updateGamesSettings(foodRemain, gameLength, monstersNumber, foodColor) 
 
 /**sets random settings values*/
 function randomizeSettings() {
+
 	let foodColor = new Array(3);
 	let gameKeys = new Array(4);
 	let foodRemain = Math.floor(Math.random() * 41) + 50; // minimum 50, maximum 90
@@ -392,7 +393,6 @@ function randomizeSettings() {
 	gameKeys[1] = 40;
 	gameKeys[2] = 37;
 	gameKeys[3] = 39;
-
 	setsGameKeys(gameKeys);
 	updateGamesSettings(foodRemain, gameLength, monstersNumber, foodColor);
 }

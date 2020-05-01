@@ -95,14 +95,15 @@
     color: black;
     font-family: Bangers;
     font-size: 18px;
-    border-width: 0px;
+}
+
+#nameSpan {
+    margin-right: 10px;
+    float: right;
 }
 
 .input {
-    font-family: Bangers;
-    font-size: 18px;
     width: 40px;
-    border: 0;
 }
 
 .images {
@@ -120,7 +121,6 @@
 #startNewGame {
     height: 19px;
     width: 700px;
-    float: right;
     color: black;
     background-color: rgb(148, 140, 140);
 }

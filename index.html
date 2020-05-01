@@ -40,7 +40,7 @@
 							<label>downKey: </label><label id="downKeyLabel">Down</label>
 						</li>
 						<li>
-							<label>leftKey: </label><label id="leftKeyLable">Left</label>
+							<label>leftKey: </label><label id="leftKeyLabel">Left</label>
 						</li>
 						<li>
 							<label>rightKey: </label><label id="rightKeyLabel">Right</label>
@@ -189,14 +189,17 @@
 			<div class="hidden" id="gameScreen">
 
 				<span id="gamelbl">
-					<label for="lblName">Name:</label>
-					<input id="lblName" type="text" class="input" />
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" class="input" value="0" />
 					<label for="lblTime">TIME:</label>
-					<input id="lblTime" type="text" class="input" />
+					<input id="lblTime" type="text" class="input" value="0"/>
 					<label for="lblLives">Lives:</label>
 					<input id="lblLives" type="text" class="input" value="5" />
+					<span id="nameSpan">
+						<label for="lblName">Name:</label>
+						<label id="lblName"></label>
+					</span>
+
 				</span>
 
 				<div id="game">
@@ -212,6 +215,7 @@
 				<div id="startNewGameDiv">
 					<button id="startNewGame"><b>New Game</b></button>
 				</div>
+
 				<audio id="gameAudio">
 					<source src="mp3/Jawsh 685 - Laxed (SIREN BEAT).mp3" type="audio/mpeg">
 				</audio>

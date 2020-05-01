@@ -47,7 +47,7 @@ function Start(userName) {
     firstDraw = true;
     gameRunning = true;
     userLoggedIn = userName;
-    lblName.value = userLoggedIn;
+    lblName.innerText = userLoggedIn;
     isMovingPointsEaten = false;
     score = 0;
     lives = 5;
