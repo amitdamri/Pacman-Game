@@ -1,0 +1,158 @@
+/************************
+*****Screens & buttons***
+*************************/
+.hidden {
+    visibility: hidden;
+    position: absolute;
+}
+
+#welcomeScreen, #registerScreen, #loginScreen, #settingsScreen {
+    height: inherit;
+    width: inherit;
+    background-size: 700px 600px;
+}
+
+/**Welcome Screen*/
+
+#welcomeScreen {
+    background-image: url("../images/Welcome.jpg");
+}
+
+#registerButton, #randomSettings {
+    margin-right: 35px;
+}
+
+.welcomebuttons {
+    position: relative;
+    padding: 15px 25px;
+    left: 210px;
+    top: 300px;
+}
+
+/**Register Screen*/
+
+#registerScreen {
+    background-image: url("../images/register.jpg");
+}
+
+#registrationForm {
+    position: relative;
+    top: 150px;
+    left: 50px;
+}
+
+.form_input {
+    background-color: #646464;
+}
+
+#registrationSubmit {
+    position: relative;
+    left: 250px;
+}
+
+/**Login Screen*/
+
+#loginScreen {
+    background-image: url("../images/Login.jpg");
+}
+
+#loginForm {
+    position: relative;
+    left: 160px;
+    top: 280px;
+}
+
+#connectbutton {
+    position: relative;
+    left: 150px;
+}
+
+/**Settings Screen*/
+#settingsScreen {
+    background-image: url("../images/Settings.jpg");
+}
+
+#settingsForm {
+    position: relative;
+    top: 85px;
+    left: 70px;
+}
+
+.settings_buttons {
+    position: relative;
+    top: -5px;
+    left: 210px;
+}
+
+/**Game Screen*/
+@font-face {
+    font-family: Bangers;
+    src: url('../resource/Bangers-Regular.ttf') format('truetype');
+}
+
+#gamelbl {
+    background-color: white;
+    color: black;
+    font-family: Bangers;
+    font-size: 18px;
+    border-width: 0px;
+}
+
+.input {
+    font-family: Bangers;
+    font-size: 18px;
+    width: 40px;
+    border: 0;
+}
+
+.images {
+    display: none;
+}
+
+#canvas {
+    background: black;
+}
+
+#game {
+    height: 560px;
+}
+
+#startNewGame {
+    height: 19px;
+    width: 700px;
+    float: right;
+    color: black;
+    background-color: rgb(148, 140, 140);
+}
+
+#startNewGameDiv {
+    height: 19px;
+    background-color: rgb(73, 68, 68);
+}
+
+/*button style */
+
+.button {
+    display: inline-block;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #646464;
+    border: 1px solid black;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.button:hover {
+    background-color: #383838
+}
+
+.button:active {
+    background-color: #574b4b;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+

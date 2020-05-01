@@ -1,0 +1,64 @@
+/*******About Modal dialog******/
+
+/* The Modal (background) */
+#aboutModalDialog {
+    display: none; /* Hidden by default */
+    position: absolute; /* Stay in place */
+    height: 750px;
+    width: 1350px;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    color: white;
+    background-color: #3b3939;
+    border: 1px solid rgba(253, 253, 253, 0.637);
+    top: 80px;
+    left: 330px ;
+    width: 35%;
+    height: 70%;
+    padding: 20px;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Modal Header */
+  .modal-header {
+    text-align: center;
+    padding: 2px 16px;
+    color: white;
+    background-color: #3a2424;
+  }
+  
+  /* Modal Body */
+  .modal-body {padding: 2px 16px;}
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+  }
+
+   /* Add Animation */
+   @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:80px; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:80px; opacity:1}
+  }

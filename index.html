@@ -1,21 +1,258 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="./app.js"></script>
-	</head>
 
-	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+<head>
+	<title>Pacman Game</title>
+	<link rel="stylesheet" href="css/appStyle.css">
+	<link rel="stylesheet" href="css/aboutModalStyle.css">
+	<link rel="stylesheet" href="css/contentStyle.css">
+	<link rel="stylesheet" href="css/footerStyle.css">
+	<link rel="stylesheet" href="css/menuStyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="./jQuery/jquery-3.4.1.slim.min.js"></script>
+	<script src="./jQuery/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="./jQuery/jquery-validation/src/additional/pattern.js"></script>
+	<script src="./JS/game.js"></script>
+	<script src="./JS/app.js"></script>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<header>
+			<img src="images/header.jpg" alt="headerImage">
+		</header>
+
+		<nav id="menu">
+			<ul id="menuBar">
+				<li><a id="welcomeMenu" href="">Welcome</a></li>
+				<li><a id="registerMenu" href="">Register</a></li>
+				<li><a id="loginMenu" href="">Login</a></li>
+				<li id="spaceForSettings">
+					<ul id="settingsInfo">
+
+						<p><label><u><b>Current settings</b></u></label></p>
+						<li>
+							<label>UpKey: </label><label id="upKeyLabel">Up</label>
+						</li>
+						<li>
+							<label>downKey: </label><label id="downKeyLabel">Down</label>
+						</li>
+						<li>
+							<label>leftKey: </label><label id="leftKeyLable">Left</label>
+						</li>
+						<li>
+							<label>rightKey: </label><label id="rightKeyLabel">Right</label>
+						</li>
+						<li>
+							<label>#Balls: </label><label id="ballsLabel">50</label>
+						</li>
+						<li>
+							<label>#Monsters: </label><label id="monstersLabel">1</label>
+						</li>
+						<li>
+							<label>Game length:(sec) </label><label id="lengthLabel">60</label>
+						</li>
+						<li>
+							<label class="points">5 points: </label><label class="circle" id="smallPointLabel"></label>
+						</li>
+						<li>
+							<label>15 points: </label><label class="circle" id="mediumPointLabel"></label>
+						</li>
+						<li>
+							<label>25 points: </label><label class="circle" id="bigPointLabel"></label>
+						</li>
+					</ul>
+				</li>
+				<li><a id="aboutMenu" href="">About</a></li>
+			</ul>
+		</nav>
+
+		<section id="content">
+
+			<div class="hidden" id="welcomeScreen">
+				<button class="button welcomebuttons" class id="registerButton">Register</button>
+				<button class="button welcomebuttons" id="loginbutton">Login</button>
+			</div>
+
+			<div class="hidden" id="registerScreen">
+				<form action="" id="registrationForm">
+					<p>
+						<label>Username: *</label>
+						<input class="form_input" name="username" type="text" placeholder="Enter Username"><br /><br />
+					</p>
+
+					<p>
+						<label>Password: *</label>
+						<input class="form_input" name="password" type="password"
+							placeholder="Enter Password"><br /><br />
+					</p>
+
+
+					<p>
+						<label>First Name: *</label>
+						<input class="form_input" name="firstName" type="text"
+							placeholder="Enter First Name"><br /><br />
+					</p>
+
+					<p>
+						<label>Last Name: *</label>
+						<input class="form_input" name="lastName" type="text" placeholder="Enter Last Name"><br /><br />
+					</p>
+
+					<p>
+						<label>Email: *</label>
+						<input class="form_input" name="email" type="text" placeholder="Enter Email"><br /><br />
+					</p>
+
+					<p>
+						<label>Birthdate: *</label>
+						<input class="form_input" name="birthdate" type="date"
+							placeholder="Enter Birthdate"><br /><br />
+					</p>
+
+					<p>
+						<input class="button" id="registrationSubmit" type="submit" value="Submit">
+					</p>
+				</form>
+			</div>
+
+			<div class="hidden" id="loginScreen">
+				<form action="" name="login" id="loginForm">
+					<p>
+						<label>Username: </label>
+						<input class="form_input" type="text" placeholder="Enter Username" name="username"><br /><br />
+					</p>
+
+					<p>
+						<label>Password: </label>
+						<input class="form_input" type="password" placeholder="Enter Password"
+							name="password"><br /><br />
+					</p>
+
+					<input class="button" id="connectbutton" type="submit" value="Connect">
+				</form>
+			</div>
+
+			<div class="hidden" id="settingsScreen">
+				<form id="settingsForm">
+					<h4>Keyboard Keys</h4>
+					<p>
+						<label>UpKey: </label>
+						<input class="form_input" type="text" id="upKey" name="upkey" value="upArrow">
+					</p>
+					<p>
+						<label>DownKey: </label>
+						<input class="form_input" type="text" id="downKey" name="downkey" value="downArrow">
+					</p>
+					<p>
+						<label>LeftKey: </label>
+						<input class="form_input" type="text" id="leftKey" name="leftkey" value="leftArrow">
+					</p>
+					<p>
+						<label>RightKey: </label>
+						<input class="form_input" type="text" id="rightKey" name="rightkey" value="rightArrow">
+					</p>
+
+					<h4>Game options</h4>
+					<p>
+						<label>Number of balls: </label>
+						<input class="form_input" type="number" id="balls" name="numberOfBalls" value="50">
+					</p>
+					<p>
+						<label>Choose Ball colors:</label><br><br>
+						<label for="smallBall">5 points:</label>
+						<input class="form_input" type="color" id="smallBall" name="smallBall" value="#FFFFFF">
+						<label for="mediumBall">15 points:</label>
+						<input class="form_input" type="color" id="mediumBall" name="mediumBall" value="#FFFF00">
+						<label for="bigBall">25 points:</label>
+						<input class="form_input" type="color" id="bigBall" name="bigBall" value="#ff0000">
+					</p>
+
+					<p>
+						<label>Number of Monsters: </label>
+						<input class="form_input" type="number" id="monsters" name="numberOfMonsters" value="1">
+					</p>
+
+					<p>
+						<label>Game length: </label>
+						<input class="form_input" type="number" id="time" name="gameLength" value="60">
+					</p>
+
+					<button class="button settings_buttons" type="button" id="randomSettings">Random</button>
+					<button class="button settings_buttons" type="submit" id="acceptSettings">OK</button>
+				</form>
+
+			</div>
+
+			<div class="hidden" id="gameScreen">
+
+				<span id="gamelbl">
+					<label for="lblName">Name:</label>
+					<input id="lblName" type="text" class="input" />
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" class="input" value="0" />
+					<label for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" class="input" />
+					<label for="lblLives">Lives:</label>
+					<input id="lblLives" type="text" class="input" value="5" />
+				</span>
+
+				<div id="game">
+					<canvas id="canvas" height="560" width="700"></canvas>
+					<img class="images" id="greenMonster" src="./resource/green_ghost.png">
+					<img class="images" id="blueMonster" src="./resource/blue_ghost.png">
+					<img class="images" id="redMonster" src="./resource/red_ghost.png">
+					<img class="images" id="yellowMonster" src="./resource/yellow_ghost.png">
+					<img class="images" id="movingPoints" src="./resource/movingPoints.gif">
+					<img class="images" id="pill" src="./resource/pill.png">
+				</div>
+
+				<div id="startNewGameDiv">
+					<button id="startNewGame"><b>New Game</b></button>
+				</div>
+				<audio id="gameAudio">
+					<source src="mp3/Jawsh 685 - Laxed (SIREN BEAT).mp3" type="audio/mpeg">
+				</audio>
+			</div>
+
+		</section>
+
+		<footer>
+			Contact us:
+			<a href="mailto:dvirsim@post.bgu.ac.il" class="fa fa-google"></a>
+			<a href="https://www.facebook.com/amit.damri.56/" class="fa fa-facebook" target="_blank"></a>
+			<a href="https://join.skype.com/invite/koYlevh5CMbJ" class="fa fa-skype" target="_blank"></a>
+			<a href="https://www.instagram.com/amitdamri/" class="fa fa-instagram" target="_blank"></a><br>
+			Ⓒ 2020 Copyright: Dvir Simhon & Amit Damri as part of Web Development Environment course at BGUniversity.
+		</footer>
+
+	</div>
+
+	<div class="sideGameImage">
+		<img id="gameImage" src="images/sideImage.jpg" alt="background">
+	</div>
+
+	<div id="aboutModalDialog">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<span class="close">&times;</span>
+				<H1>About</H1>
+			</div>
+
+			<div class="modal-body">
+				<p>Names: Amit damri & Dvir Simhon</p><br>
+				<p><b>Uses of jQuery plugin:</b></p>
+				<p>validation, patterns in order to user regular expressions, ready function.
+					We didn't use jQuery template.</p><br>
+				<p><b>Difficulties we had:</b></p>
+				<p>Bla bla bla bla.</p>
+			</div>
+
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
-		</div>
-	</body>
+	</div>
+</body>
+
 </html>
