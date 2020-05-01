@@ -329,9 +329,6 @@ function pacmanPassedInCandyCell() {
         isMovingPointsEaten = true;
     } else if (board[shape.i][shape.j] == 20) { // pill
          lives++;
-    } else if (board[shape.i][shape.j] == 21) { // pill and monster
-        lives++;
-        //executeMonsterTouchedPacman();
     } else if (board[shape.i][shape.j] == 22) { // pill and moving points
         lives++;
         score += 50;
