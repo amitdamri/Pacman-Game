@@ -1,0 +1,51 @@
+#gameImage {
+    position: absolute;
+    margin: 0;
+    float: left;
+    width: 450px;
+    height: 750px;
+}
+
+.container {
+    float: left;
+    width: 900px;
+    height: 750px;
+}
+
+header {
+    color: red;
+    font-size: 30px;
+    height: 75px;
+    width: 900px;
+    text-align: center;
+    background-color: #333;
+}
+
+/*****Menu bar - the rest of the menu has different css**/
+nav {
+    float: left;
+    height: 600px;
+    width: 200px;
+}
+
+
+/***Section part - the content has difeerent css**/
+section {
+    float: left;
+    height: 600px;
+    width: 700px;
+}
+
+/***Footer part****/
+footer {
+    color: white;
+    text-align: center;
+    float: left;
+    height: 75px;
+    width: inherit;
+    background-color: #000000;
+}
+
+
+
+
