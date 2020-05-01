@@ -71,7 +71,7 @@ function Start(userName) {
     //sets game labels
     lblLives.value = lives;
     lblScore.value = score;
-    
+
     //Intervals and listeners
     addEventListener("keydown", gameKeyEventDown);
     interval = setInterval(updateTime, 100);
@@ -79,7 +79,7 @@ function Start(userName) {
 }
 
 //Init the board arrays
-function initBoard(){
+function initBoard() {
     board = new Array(20);
     for (var i = 0; i < 20; i++) {
         board[i] = new Array(20);
@@ -87,20 +87,20 @@ function initBoard(){
 }
 
 //Loads game images - monsters, pill and moving point.
-function loadImages(){
-        //Load images
-        greenMonster = document.getElementById("greenMonster");
-        blueMonster = document.getElementById("blueMonster");
-        redMonster = document.getElementById("redMonster");
-        yellowMonster = document.getElementById("yellowMonster");
-        pill = document.getElementById("pill");
-        movingPointsGif = document.getElementById("movingPoints");
-    
-        //Sets monster images
-        monsters_color[0] = greenMonster;
-        monsters_color[1] = blueMonster;
-        monsters_color[2] = redMonster;
-        monsters_color[3] = yellowMonster;
+function loadImages() {
+    //Load images
+    greenMonster = document.getElementById("greenMonster");
+    blueMonster = document.getElementById("blueMonster");
+    redMonster = document.getElementById("redMonster");
+    yellowMonster = document.getElementById("yellowMonster");
+    pill = document.getElementById("pill");
+    movingPointsGif = document.getElementById("movingPoints");
+
+    //Sets monster images
+    monsters_color[0] = greenMonster;
+    monsters_color[1] = blueMonster;
+    monsters_color[2] = redMonster;
+    monsters_color[3] = yellowMonster;
 }
 
 // restart game after a death - monster touched pacman
@@ -214,7 +214,7 @@ function placeCharacters(board) {
 
     // moving points
     if (isMovingPointsEaten) return;
-    
+
     if (monsters < 4) { // place it in the corner
         movingPoints.i = 18;
         movingPoints.j = 1;
@@ -264,7 +264,7 @@ function updateTime() {
 function UpdatePosition(keyPressed) {
 
     lastPacmanPos = keyPressed; // update last position, for next drawings when pacman isn't moving
-    
+
     board[shape.i][shape.j] = 0; // pacman left the cell, it was a free cell or candy eaten
 
     updatePacmanPosition(keyPressed);
@@ -275,17 +275,17 @@ function UpdatePosition(keyPressed) {
 
     lblScore.value = score;
     lblLives.value = lives;
-    
-    if (isMonsterTouchedPacman()) 
+
+    if (isMonsterTouchedPacman())
         executeMonsterTouchedPacman();
-    else 
+    else
         Draw(keyPressed);
 
 }
 
 // update position of pacman when required key is pressed
 function updatePacmanPosition(keyPressed) {
-    
+
     if (keyPressed == 1) {
         if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
             shape.j--;
@@ -297,11 +297,19 @@ function updatePacmanPosition(keyPressed) {
     } else if (keyPressed == 3) {
         if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
             shape.i--;
+        } 
+        //if at the left end go back to the right end.
+        else if (shape.i == 0) {
+            shape.i = board.length - 1;
         }
     } else if (keyPressed == 4 || firstDraw) {
         firstDraw = false;
-        if (shape.i < board.length && board[shape.i + 1][shape.j] != 4) {
+        if (shape.i < board.length - 1 && board[shape.i + 1][shape.j] != 4) {
             shape.i++;
+        } 
+        //if at the right end go back to the left end.
+        else if (shape.i == board.length - 1) {
+            shape.i = 0;
         }
     }
 }
@@ -328,7 +336,7 @@ function pacmanPassedInCandyCell() {
         score += 75;
         isMovingPointsEaten = true;
     } else if (board[shape.i][shape.j] == 20) { // pill
-         lives++;
+        lives++;
     } else if (board[shape.i][shape.j] == 22) { // pill and moving points
         lives++;
         score += 50;
@@ -348,7 +356,7 @@ function executeMonsterTouchedPacman() {
             score -= 20;
         else
             score = 0;
-    
+
         if (lives > 2)
             lives -= 2;
         else
@@ -360,14 +368,14 @@ function executeMonsterTouchedPacman() {
             score -= 10;
         else
             score = 0;
-    
+
         lives--;
     }
-    
+
     lblScore.value = score;
     lblLives.value = lives;
     checkLives();
-    
+
 }
 
 // manages live reducing case: a complete restart after invalidation (no more lives) or restart after a death
@@ -496,12 +504,12 @@ function updatePositionMovingPoints() {
         board[movingPoints.i][movingPoints.j] = 16; // 25 pts cell and moving points together
     } else if (board[movingPoints.i][movingPoints.j] == 20) {
         board[movingPoints.i][movingPoints.j] = 22; // pill cell and moving points together
-    } else if (board[movingPoints.i][movingPoints.j] == 2)  { // moving points on pacman cell, eaten by pacman
+    } else if (board[movingPoints.i][movingPoints.j] == 2) { // moving points on pacman cell, eaten by pacman
         score += 50;
         lblScore.value = score;
         isMovingPointsEaten = true;
     }
-    
+
     Draw(lastPacmanPos);
 }
 
@@ -579,7 +587,7 @@ function drawWalls(x, y) {
     context.lineWidth = 2;
     context.strokeStyle = "white";
     context.stroke();
-            
+
 }
 
 // draw any type of candy
@@ -588,7 +596,7 @@ function drawCandies(i, j, x, y) {
     context.clearRect(x - 17.5, y - 14, 35, 28);
     context.beginPath();
     context.arc(x, y, 12, 0, 2 * Math.PI); // circle
-    
+
     if (board[i][j] == 5) {
         context.fillStyle = food_color[0]; //5 pts candy
         context.fill();
