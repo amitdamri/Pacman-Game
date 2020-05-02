@@ -2,15 +2,15 @@
 Pacman Game Version 1.0 10-05-20  
 ---------------------------------------------------------------------------------------------------------
 Hello and Welcome to Pacman Game!  
-Here some instruction that will help you use our game:  
+Here are some instructions that will help you use our game:  
 - Kick off by clicking on Register and sign up.  
 - A login screen will show up, sign in with the user and password you chose.  
 - Choose game keys:  
-                KeyBoard keys for moving pacman: up, down, left, right  
+                - KeyBoard keys for moving pacman: up, down, left, right  
 - Choose Game options:  
-                Balls number, color for each ball type (5 points, 15 points, 25 points)  
-                Number of monsters (from 1 to 4)  
-                Game length: time till end game (at least 60 seconds)  
+                - Balls number, color for each ball type (5 points, 15 points, 25 points)  
+                - Number of monsters (from 1 to 4)  
+                - Game length: time till end game (at least 60 seconds)  
 - Feel risky? Click "Random" and get random values for the game options.  
              Notice, keyboard keys will be set by default to keyboard arrows (up, down, left and right)
 ----------------------------------------------------------------------------------------------------------
@@ -18,27 +18,27 @@ Game instructions and important remarks
 ----------------------------------------------------------------------------------------------------------
 1. Pacman will be moving by the directions of keys arrows you chose.  
 2. Monster touched pacman? You lost one live and 10 points.  
-3. Was it a green monster? You lost two lives and 20 points.  
+3. **Bonus:** Was it a green monster? You lost two lives and 20 points.  
 4. Did you catch The blue dancing monster? 20 points was added.  
-5. Want more lives? Try to eat the "pill candy" and get another live.  
+5. **Bonus:** Want more lives? Try to eat the "pill candy" and get another live.  
 6. After each monster and pacman touch, all games charachters will be placed in new places and the game will be
 continued from current state.  
 -----------------------------------------------------------------------------------------------------------
 How to win the game? :-)
 ----------------------------------------------------------------------------------------------------------
-1. Time is over.
+1. Time is over.  
         AND
-2. Score is greater than 99.
+2. Score is greater than 99.  
         AND
 3. You still have lives left.
 ----------------------------------------------------------------------------------------------------------
 When do you lose? :-(
 ----------------------------------------------------------------------------------------------------------
-1. Time is over and you scored less than 100 points.
-                OR
+1. Time is over and you scored less than 100 points.  
+                OR  
 2. Time is over and no more lives left.
 ---------------------------------------------------------------------------------------------------------
-Copyright 2020 Pacman Game. all rights reserved.
+Copyright 2020 Pacman Game. all rights reserved.  
 This program is subject to license agreement, copyright,
 trademark, patent and other laws.
 
