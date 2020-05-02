@@ -208,6 +208,10 @@ function placeCharacters(board) {
 
     // pacman
     let position = findRandomEmptyCell(board);
+    while (placedNextToMonsters(position))
+    {
+        position = findRandomEmptyCell(board);
+    }
     shape.i = position[0];
     shape.j = position[1];
     board[position[0]][position[1]] = 2;
@@ -226,6 +230,33 @@ function placeCharacters(board) {
         movingPoints.j = position[1];
         board[position[0]][position[1]] = 13;
     }
+
+}
+
+// return true if pacman was placed right next to monster its first position 
+function placedNextToMonsters(position) {
+
+    // up right monster
+    if (position.i == 2 && position.j == 1) return true;
+    if (position.i == 2 && position.j == 2) return true;
+    if (position.i == 1 && position.j == 2) return true;
+    
+    // up left monster
+    if (position.i == 17 && position.j == 1) return true;
+    if (position.i == 17 && position.j == 2) return true;
+    if (position.i == 18 && position.j == 2) return true;
+
+    // bottom right monster
+    if (position.i == 17 && position.j == 18) return true;
+    if (position.i == 17 && position.j == 17) return true;
+    if (position.i == 18 && position.j == 17) return true;
+
+    // bottom left monster
+    if (position.i == 17 && position.j == 1) return true;
+    if (position.i == 17 && position.j == 2) return true;
+    if (position.i == 18 && position.j == 2) return true;
+
+    return false;
 
 }
 
@@ -408,31 +439,31 @@ function updatePositionMonsters() {
     for (let i = 0; i < monsters; i++) {
         let position = monsters_position[i];
         let chosen_position = new Object();
-        if (position.i < shape.i && board[position.i + 1][position.j] != 4 && !movingPointsOrMonsterPlace(position.i + 1, position.j)) {
+        if (position.i + 1 < board.length && position.i < shape.i && board[position.i + 1][position.j] != 4 && !movingPointsOrMonsterPlace(position.i + 1, position.j)) {
             chosen_position.i = position.i + 1;
             chosen_position.j = position.j;
-        } else if (position.j > shape.j && board[position.i][position.j - 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j - 1)) {
+        } else if (position.j - 1 >= 0 && position.j > shape.j && board[position.i][position.j - 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j - 1)) {
             chosen_position.i = position.i;
             chosen_position.j = position.j - 1;
-        } else if (position.i > shape.i && board[position.i - 1][position.j] != 4 && !movingPointsOrMonsterPlace(position.i - 1, position.j)) {
+        } else if (position.i - 1 >= 0 && position.i > shape.i && board[position.i - 1][position.j] != 4 && !movingPointsOrMonsterPlace(position.i - 1, position.j)) {
             chosen_position.i = position.i - 1;
             chosen_position.j = position.j;
-        } else if (position.j < shape.j && board[position.i][position.j + 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j + 1)) {
+        } else if (position.j + 1 < board[0].length && position.j < shape.j && board[position.i][position.j + 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j + 1)) {
             chosen_position.i = position.i;
             chosen_position.j = position.j + 1;
         }
         // only one option is possible, choose it
         else {
-            if (board[position.i + 1][position.j] != 4 && !movingPointsOrMonsterPlace(position.i + 1, position.j)) {
+            if (position.i + 1 < board.length && board[position.i + 1][position.j] != 4 && !movingPointsOrMonsterPlace(position.i + 1, position.j)) {
                 chosen_position.i = position.i + 1;
                 chosen_position.j = position.j;
-            } else if (board[position.i][position.j - 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j - 1)) {
+            } else if (position.j - 1 >= 0 && board[position.i][position.j - 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j - 1)) {
                 chosen_position.i = position.i;
                 chosen_position.j = position.j - 1;
-            } else if (board[position.i - 1][position.j] != 4 && !movingPointsOrMonsterPlace(position.i - 1, position.j)) {
+            } else if (position.i - 1 >= 0 && board[position.i - 1][position.j] != 4 && !movingPointsOrMonsterPlace(position.i - 1, position.j)) {
                 chosen_position.i = position.i - 1;
                 chosen_position.j = position.j;
-            } else if (board[position.i][position.j + 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j + 1)) {
+            } else if (position.j + 1 < board[0].length && board[position.i][position.j + 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j + 1)) {
                 chosen_position.i = position.i;
                 chosen_position.j = position.j + 1;
             }
@@ -518,16 +549,16 @@ function getPossiblePositions(i, j) {
 
     let ans = new Array();
 
-    if (board[i + 1][j] == 0 || board[i + 1][j] == 2 || board[i + 1][j] == 5 || board[i + 1][j] == 6 || board[i + 1][j] == 7) {
+    if (i + 1 < board.length && (board[i + 1][j] == 0 || board[i + 1][j] == 2 || board[i + 1][j] == 5 || board[i + 1][j] == 6 || board[i + 1][j] == 7)) {
         ans.push([i + 1, j]);
     }
-    if (board[i - 1][j] == 0 || board[i - 1][j] == 2 || board[i - 1][j] == 5 || board[i - 1][j] == 6 || board[i - 1][j] == 7) {
+    if (i - 1 >= 0 && (board[i - 1][j] == 0 || board[i - 1][j] == 2 || board[i - 1][j] == 5 || board[i - 1][j] == 6 || board[i - 1][j] == 7)) {
         ans.push([i - 1, j]);
     }
-    if (board[i][j + 1] == 0 || board[i][j + 1] == 2 || board[i][j + 1] == 5 || board[i][j + 1] == 6 || board[i][j + 1] == 7) {
+    if (j + 1 < board[0].length &&  (board[i][j + 1] == 0 || board[i][j + 1] == 2 || board[i][j + 1] == 5 || board[i][j + 1] == 6 || board[i][j + 1] == 7)) {
         ans.push([i, j + 1]);
     }
-    if (board[i][j - 1] == 0 || board[i][j - 1] == 2 || board[i][j - 1] == 5 || board[i][j - 1] == 6 || board[i][j - 1] == 7) {
+    if (j - 1 >= 0 && (board[i][j - 1] == 0 || board[i][j - 1] == 2 || board[i][j - 1] == 5 || board[i][j - 1] == 6 || board[i][j - 1] == 7)) {
         ans.push([i, j - 1]);
     }
     return ans;
