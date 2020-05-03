@@ -237,24 +237,28 @@ function placeCharacters(board) {
 function placedNextToMonsters(position) {
 
     // up right monster
-    if (position.i == 2 && position.j == 1) return true;
-    if (position.i == 2 && position.j == 2) return true;
-    if (position.i == 1 && position.j == 2) return true;
+    if (position[0] == 1 && position[1] == 1) return true;
+    if (position[0] == 2 && position[1] == 1) return true;
+    if (position[0] == 2 && position[1] == 2) return true;
+    if (position[0] == 1 && position[1] == 2) return true;
     
     // up left monster
-    if (position.i == 17 && position.j == 1) return true;
-    if (position.i == 17 && position.j == 2) return true;
-    if (position.i == 18 && position.j == 2) return true;
+    if (position[0] == 18 && position[1] == 1) return true;
+    if (position[0] == 18 && position[1] == 2) return true;
+    if (position[0] == 17 && position[1] == 1) return true;
+    if (position[0] == 17 && position[1] == 2) return true;
 
     // bottom right monster
-    if (position.i == 17 && position.j == 18) return true;
-    if (position.i == 17 && position.j == 17) return true;
-    if (position.i == 18 && position.j == 17) return true;
+    if (position[0] == 18 && position[1] == 18) return true;
+    if (position[0] == 18 && position[1] == 17) return true;
+    if (position[0] == 17 && position[1] == 18) return true;
+    if (position[0] == 17 && position[1] == 17) return true;
 
     // bottom left monster
-    if (position.i == 17 && position.j == 1) return true;
-    if (position.i == 17 && position.j == 2) return true;
-    if (position.i == 18 && position.j == 2) return true;
+    if (position[0] == 1 && position[1] == 18) return true;
+    if (position[0] == 2 && position[1] == 18) return true;
+    if (position[0] == 1 && position[1] == 17) return true;
+    if (position[0] == 2 && position[1] == 17) return true;
 
     return false;
 
@@ -420,7 +424,7 @@ function checkLives() {
             switchScreen("#welcomeScreen");
         }
     } else {
-        alert("Monster Catch you.")
+        alert("Monster caught you.")
         restartAfterDeath();
     }
 }
@@ -466,6 +470,9 @@ function updatePositionMonsters() {
             } else if (position.j + 1 < board[0].length && board[position.i][position.j + 1] != 4 && !movingPointsOrMonsterPlace(position.i, position.j + 1)) {
                 chosen_position.i = position.i;
                 chosen_position.j = position.j + 1;
+            } else { // wait one iteration you're blocked by characters and walls
+                chosen_position.i = position.i;
+                chosen_position.j = position.j; 
             }
         }
 
@@ -481,7 +488,7 @@ function updatePositionMonsters() {
 
 }
 
-// return true if it's an already catched place (by another characther)
+// return true if it's an already caught place (by another characther)
 function movingPointsOrMonsterPlace(i, j) {
 
     return (board[i][j] == 9 || board[i][j] == 10 || board[i][j] == 11 || board[i][j] == 12 ||
@@ -584,6 +591,7 @@ function Draw(key) {
             else if (value == 13 || value == 14 || value == 15 || value == 16 || value == 22) drawMovingPoints(center.x, center.y);
         }
     }
+    
 
 }
 
