@@ -189,17 +189,16 @@
 			<div class="hidden" id="gameScreen">
 
 				<span id="gamelbl">
+					<span id="nameSpan">
+						<label for="lblName">Name:</label>
+						<label id="lblName"></label>
+					</span>
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" class="input" value="0" />
 					<label for="lblTime">TIME:</label>
 					<input id="lblTime" type="text" class="input" value="0"/>
 					<label for="lblLives">Lives:</label>
 					<input id="lblLives" type="text" class="input" value="5" />
-					<span id="nameSpan">
-						<label for="lblName">Name:</label>
-						<label id="lblName"></label>
-					</span>
-
 				</span>
 
 				<div id="game">
@@ -216,7 +215,7 @@
 					<button id="startNewGame"><b>New Game</b></button>
 				</div>
 
-				<audio id="gameAudio">
+				<audio id="gameAudio" loop>
 					<source src="mp3/Jawsh 685 - Laxed (SIREN BEAT).mp3" type="audio/mpeg">
 				</audio>
 			</div>
@@ -247,15 +246,19 @@
 			</div>
 
 			<div class="modal-body">
-				<p>Names: Amit damri & Dvir Simhon</p><br>
+				<p>Names: Amit damri & Dvir Simhon</p>
 				<p><b>Uses of jQuery plugin:</b></p>
-				<p>validation, patterns in order to user regular expressions, ready function.
-					We didn't use jQuery template.</p><br>
+				<p>- jQuery validate function in order to set rules and messages.
+					<br>- Validation attribute that adds methods for the validate function.
+					<br>- Patterns in order to use regular expressions.
+					<br>- Ready function and get elements by $ sign.
+					<br>* We didn't use jQuery template.</p>
 				<p><b>Difficulties we had:</b></p>
 				<p> 1. We had to get used to think consistently about visual design, which seemed to be
 					a pretty diffcult mission.
-					2. We had to deal with many types of end cases (what happens when a moving point passes on candy
+					<br>2. We had to deal with many types of end cases (what happens when a moving point passes on candy
 					and in that very moment meets the pacman?)
+					<br>3. We had to learn and understand new programming language from scratch.
 				</p>
 			</div>
 
