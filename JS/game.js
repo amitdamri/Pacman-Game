@@ -1,5 +1,4 @@
 var context;
-var shape = new Object(); // pacman position
 var board;
 var score;
 var pac_color;
@@ -23,6 +22,7 @@ var lastPacmanPos;
 var timeRemain;
 var userLoggedIn;
 var firstDraw;
+var shape = new Object(); // pacman position
 var gameRunning = false;
 var monsters_color = new Array(4);
 var movingPoints = new Object();
@@ -871,8 +871,6 @@ function playAudio() {
 
     audio = document.getElementById("gameAudio");
     audio.play();
-    audio.loop = true;
-
 }
 
 //Stops the audio
