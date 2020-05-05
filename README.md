@@ -46,7 +46,7 @@ When do you lose? :-(
 ----------------------------------------------------------------------------------------------------------
 1. Time is over and you scored less than 100 points.  
                 OR  
-2. Time is over and no more lives left.
+2. No more lives left.
 ---------------------------------------------------------------------------------------------------------
 Copyright 2020 Pacman Game. all rights reserved.  
 This program is subject to license agreement, copyright,
