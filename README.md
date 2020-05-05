@@ -1,6 +1,16 @@
 # Assignment2  
 Pacman Game Version 1.0 10-05-20  
+## Submission Information
 ---------------------------------------------------------------------------------------------------------
+- Names: Amit Damri & Dvir Simhon  
+- ID: 312199698 & 205520141  
+- Site Link: https://sise-web-development-environments.github.io/assignment2-amit-dvir/  
+- Added functionality:   
+                1. added pills that if the pacman will eat them he'll get one more live.
+                2. added 4 types of monsters - there are 4 different color monsters, while the green monster is a "strong" monster that                 removes 2 lives and 20 points.
+----------------------------------------------------------------------------------------------------------
+introduction   
+----------------------------------------------------------------------------------------------------------
 Hello and Welcome to Pacman Game!  
 Here are some instructions that will help you use our game:  
 - Kick off by clicking on Register and sign up.  
