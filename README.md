@@ -7,7 +7,7 @@ Pacman Game Version 1.0 10-05-20
 - Site Link: https://sise-web-development-environments.github.io/assignment2-amit-dvir/  
 - Added functionality:   
                 1. added pills that if the pacman eats them he gets one more live.  
-                2. added 4 types of monsters - there are 4 different color monsters, while the green monster is a "strong" monster that                 removes 2 lives and 20 points.
+                2. added 4 types of monsters - there are 4 different color monsters: yellow, red, green and blue, while the green                       monster is a "strong" monster that removes 2 lives and 20 points.  
 ----------------------------------------------------------------------------------------------------------
 introduction   
 ----------------------------------------------------------------------------------------------------------
@@ -28,9 +28,9 @@ Game instructions and important remarks
 ----------------------------------------------------------------------------------------------------------
 1. Pacman will be moving by the directions of keys arrows you chose.  
 2. Monster touched pacman? You lost one live and 10 points.  
-3. **Bonus:** Was it a green monster? You lost two lives and 20 points.  
-4. Did you catch The blue dancing monster? 20 points was added.  
-5. **Bonus:** Want more lives? Try to eat the "pill candy" and get another live.  
+3. **Bonus:** Was it a green monster? You lost two lives and 20 points - <img src="/resource/green_ghost.png" width="30">.  
+4. Did you catch The blue dancing monster? 20 points was added - <img src="/resource/movingPoints.gif" width="30">.  
+5. **Bonus:** Want more lives? Try to eat the "pill candy" and get another live - <img src="/resource/pill.png" width="30">.  
 6. After each monster and pacman touch, all games charachters will be placed in new places and the game will be
 continued from current state.  
 -----------------------------------------------------------------------------------------------------------
