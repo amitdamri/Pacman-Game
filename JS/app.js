@@ -1,10 +1,11 @@
 
 var users;
 var loginUser;
-
+var keyChanged;
 
 $(document).ready(function () {
 	users = [];
+	keyChanged = false;
 	addUserP();
 	setListeners();
 	setRegistrationRules();
@@ -283,9 +284,16 @@ function switchScreen(div) {
 
 	/**shows settings info on the side menu bar*/
 	if (div == "#gameScreen") {
+		keyChanged = true;
 		$("#settingsInfo").css('visibility', 'visible');
 		Start(loginUser);
 	} else {
+
+		//returns default keys
+		if (keyChanged){
+			setDefualtKeys();
+			keyChanged = false;
+		}
 		//removes game Key listener and stops interval if running
 		stopGame();
 
@@ -380,7 +388,6 @@ function updateGamesSettings(foodRemain, gameLength, monstersNumber, foodColor) 
 function randomizeSettings() {
 
 	let foodColor = new Array(3);
-	let gameKeys = new Array(4);
 	let foodRemain = Math.floor(Math.random() * 41) + 50; // minimum 50, maximum 90
 	let monstersNumber = Math.floor(Math.random() * 4) + 1; // minimum 1 maximum 4
 	let gameLength = Math.floor(Math.random() * 100) + 60; // minimum 60 seconds
@@ -388,12 +395,7 @@ function randomizeSettings() {
 	foodColor[1] = getRandomColor();
 	foodColor[2] = getRandomColor();
 
-	//default game keys
-	gameKeys[0] = 38;
-	gameKeys[1] = 40;
-	gameKeys[2] = 37;
-	gameKeys[3] = 39;
-	setsGameKeys(gameKeys);
+	setDefualtKeys();
 	updateGamesSettings(foodRemain, gameLength, monstersNumber, foodColor);
 }
 
@@ -406,3 +408,19 @@ function getRandomColor() {
 	}
 	return color;
 }
+
+//sets defualt keys
+function setDefualtKeys(){
+	let gameKeys = new Array(4);
+	$("#upKeyLabel").text("ArrowUp");
+	$("#downKeyLabel").text("ArrowDown");
+	$("#leftKeyLabel").text("ArrowLeft");
+	$("#rightKeyLabel").text("ArrowRight");
+	//default game keys
+	gameKeys[0] = 38;
+	gameKeys[1] = 40;
+	gameKeys[2] = 37;
+	gameKeys[3] = 39;
+	setsGameKeys(gameKeys);
+}
+
