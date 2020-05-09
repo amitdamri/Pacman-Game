@@ -91,6 +91,7 @@ function SettingListeners() {
 			document.getElementById('upKey').value = event.code;
 		} else {
 			alert("Cannot choose same keys for different direction. Please try again.")
+			return false;
 		}
 	});
 
@@ -100,6 +101,7 @@ function SettingListeners() {
 			document.getElementById('downKey').value = event.code;
 		} else {
 			alert("Cannot choose same keys for different direction. Please try again.");
+			return false;
 		}
 	});
 
@@ -109,6 +111,7 @@ function SettingListeners() {
 			document.getElementById('leftKey').value = event.code;
 		} else {
 			alert("Cannot choose same keys for different direction. Please try again.")
+			return false;
 		}
 	});
 
@@ -118,6 +121,7 @@ function SettingListeners() {
 			document.getElementById('rightKey').value = event.code;
 		} else {
 			alert("Cannot choose same keys for different direction. Please try again.")
+			return false;
 		}
 	});
 
@@ -395,8 +399,9 @@ function randomizeSettings() {
 	foodColor[1] = getRandomColor();
 	foodColor[2] = getRandomColor();
 
-	setDefualtKeys();
+	
 	updateGamesSettings(foodRemain, gameLength, monstersNumber, foodColor);
+	setDefualtKeys();
 }
 
 /**Calculates random color code */
