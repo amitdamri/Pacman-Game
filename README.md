@@ -3,7 +3,6 @@ Pacman Game Version 1.0 10-05-20
 ## Submission Information
 ---------------------------------------------------------------------------------------------------------
 - Names: Amit Damri & Dvir Simhon  
-- ID: 312199698 & 205520141  
 - Site Link: https://sise-web-development-environments.github.io/assignment2-amit-dvir/  
 - Added functionality:   
                 1. added pills that if the pacman eats them he gets one more live.  
